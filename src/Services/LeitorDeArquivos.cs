@@ -2,7 +2,7 @@
 
 namespace TeamEye.Services
 {
-    public class Class1
+    public class LeitorDeArquivos
     {
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TeamEye.Core.Entities
 {
-    class DetalhesRodada
+    public class DetalhesRodada
     {        
         public int Pontos { get; private set; }
         public int Jogos { get; private set; }
@@ -17,21 +17,21 @@ namespace TeamEye.Core.Entities
         public Rodada Rodada { get; private set; }
         public Time Time { get; private set; }
 
-        public void RegistrarVitoria(int gp, int gc)
-        {
+        //public void RegistrarVitoria(int gp, int gc)
+        //{
 
-        }
-        public void RegistrarDerrota(int gp, int gc)
-        {
+        //}
+        //public void RegistrarDerrota(int gp, int gc)
+        //{
 
-        }
+        //}
 
-        public void RegistrarEmpate(int gp, int gc)
-        {
+        //public void RegistrarEmpate(int gp, int gc)
+        //{
 
-        }
+        //}
 
-        //public void RegistrarDetalhe(ResultadoPartidaEnum resultado, int gp, int gc)
+        //public void RegistrarDetalheRodada(ResultadoPartidaEnum resultado, int gp, int gc)
         //{
         //    switch (resultado)
         //    {
