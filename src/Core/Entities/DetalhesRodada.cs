@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TeamEye.Core.Crosscutting.Attributes;
 
 namespace TeamEye.Core.Entities
 {
     public class DetalhesRodada
-    {        
+    {
+        [TxtDataSource(PositionOrder = 4)]
         public int Pontos { get; private set; }
-        public int Jogos { get; private set; }
-        public int Vitorias { get; private set; }
-        public int Empates { get; private set; }
-        public int Derrotas { get; private set; }
-        public int GolsPro { get; private set; }
-        public int GolsContra { get; private set; }
 
+        [TxtDataSource(PositionOrder = 5)]
+        public int Jogos { get; private set; }
+
+        [TxtDataSource(PositionOrder = 6)]
+        public int Vitorias { get; private set; }
+
+        [TxtDataSource(PositionOrder = 7)]
+        public int Empates { get; private set; }
+
+        [TxtDataSource(PositionOrder = 8)]
+        public int Derrotas { get; private set; }
+
+        [TxtDataSource(PositionOrder = 9)]
+        public int GolsPro { get; private set; }
+
+        [TxtDataSource(PositionOrder = 10)]
+        public int GolsContra { get; private set; } 
+        
         public Rodada Rodada { get; private set; }
         public Time Time { get; private set; }
 
@@ -31,20 +45,18 @@ namespace TeamEye.Core.Entities
 
         //}
 
-        //public void RegistrarDetalheRodada(ResultadoPartidaEnum resultado, int gp, int gc)
-        //{
-        //    switch (resultado)
-        //    {
-        //        case ResultadoPartidaEnum.Vitoria:
-        //            Pontos Regras.PONTOS_POR_VITORIA
-        //            break;
-        //        case ResultadoPartidaEnum.Derrota:
-        //            break;
-        //        case ResultadoPartidaEnum.Empate:
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
+        public DetalhesRodada(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Rodada rodada, Time time)
+        {
+            Pontos = pontos;
+            Jogos = jogos;
+            Vitorias = vitorias;
+            Empates = empates;
+            Derrotas = derrotas;
+            GolsPro = golsPro;
+            GolsContra = golsContra;
+            Rodada = rodada;
+            Time = time;
+        }
     }
 }
+
