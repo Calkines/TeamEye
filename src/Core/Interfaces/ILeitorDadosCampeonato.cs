@@ -7,6 +7,6 @@ namespace TeamEye.Core.Interfaces
 {
     public interface ILeitorDadosCampeonato
     {
-        DetalhesRodada InterpretarDetalhesRodada(string linha);
+        Rodada InterpretarDadosCampeonato(string dados);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using TeamEye.Core.Crosscutting.Attributes;
 using TeamEye.Core.Crosscutting.Utils;
@@ -11,7 +12,11 @@ namespace TeamEye.Infra.Leitores
 {
     public class LeitorTxtDadosCampeonato : LeitorDadosCampeonatoAbstract
     {
-        public override DetalhesRodada InterpretarDetalhesRodada(string linha)
+        public override Rodada InterpretarDadosCampeonato(string dado)
+        {
+            throw new NotImplementedException();
+        }
+        public DetalhesRodada InterpretarDetalhesRodada(string linha)
         {
             var linhaDecomposta = DecompoemLinhasTextoEmPedacos(linha);
             return ConvertePedacosTextoEmDetalhesRodada(linhaDecomposta);
@@ -28,7 +33,7 @@ namespace TeamEye.Infra.Leitores
 
         private DetalhesRodada ConvertePedacosTextoEmDetalhesRodada(IEnumerable<string> pedacosTexto)
         {
-            var relation = RetornaCorrespondenciaCampoPosicao();
+            var relation = ReflectionHelper.RetornaCorrespondenciaCampoPosicao();
 
             if (relation.Count != pedacosTexto.Count())
                 throw new DadosIncompletosException($"Era esperado {relation.Count} dado(s) para esta fonte, mas ela contém {pedacosTexto.Count()}");
@@ -58,23 +63,58 @@ namespace TeamEye.Infra.Leitores
             Time time = null;
             return new DetalhesRodada(pontos, jogos, vitorias, empates, derrotas, golsPro, golsContra, rodada, time);
         }
+    }
 
-        private Dictionary<string, int> RetornaCorrespondenciaCampoPosicao()
+    internal static class ReflectionHelper
+    {
+        private static List<Type> _tiposAvaliados = new List<Type>();
+        private static List<Type> _tiposFaltandoAvaliar = new List<Type>();
+        public static SortedDictionary<string, int> RetornaCorrespondenciaCampoPosicao()
         {
-            Dictionary<string, int> relacaoCampoPosicao = new Dictionary<string, int>();
+            SortedDictionary<string, int> relacaoCampoPosicao = new SortedDictionary<string, int>();
 
-            var membersInfo = typeof(Rodada).GetMembers();
-            foreach (var memberInfo in membersInfo)
+            foreach (var memberInfo in InspecionaMemberInfo(typeof(Rodada)))
             {
-                if (memberInfo.MemberType == System.Reflection.MemberTypes.Property && memberInfo.CustomAttributes.Count() > 0)
+                foreach (TxtDataSourceAttribute attribute in memberInfo.GetCustomAttributes(typeof(TxtDataSourceAttribute), true))
                 {
-                    foreach (TxtDataSourceAttribute attribute in memberInfo.GetCustomAttributes(typeof(TxtDataSourceAttribute), true))
-                    {
-                        relacaoCampoPosicao.Add(memberInfo.Name, attribute.PositionOrder);
-                    }
-                }                
+                    relacaoCampoPosicao.Add(memberInfo.Name, attribute.PositionOrder);
+                }
             }
+            _tiposAvaliados = new List<Type>();
+            _tiposFaltandoAvaliar = new List<Type>();
             return relacaoCampoPosicao;
+        }
+        private static IEnumerable<MemberInfo> InspecionaMemberInfo(Type baseClass)
+        {
+            List<MemberInfo> infos = null;
+            if (infos == null)
+                infos = new List<MemberInfo>();
+
+            var propertiesInfo = baseClass.GetProperties();
+            do {
+                if (_tiposFaltandoAvaliar.Count > 0)
+                    propertiesInfo = _tiposFaltandoAvaliar.LastOrDefault().GetProperties();
+                ColetaInformacoesPropriedades(propertiesInfo, infos);
+            } while (_tiposFaltandoAvaliar.Count != 0);
+            return infos;
+
+        }
+        private static IEnumerable<MemberInfo> ColetaInformacoesPropriedades(PropertyInfo[] propertiesInfo, List<MemberInfo> infos)
+        {
+            foreach (var propertyInfo in propertiesInfo)
+            {
+                if (propertyInfo.MemberType == System.Reflection.MemberTypes.Property && propertyInfo.CustomAttributes.Count() > 0)
+                    infos.Add(propertyInfo);
+                else if (propertyInfo.MemberType == System.Reflection.MemberTypes.Property 
+                        && propertyInfo.PropertyType.Namespace == "TeamEye.Core.Entities" 
+                        && propertyInfo.PropertyType != propertyInfo.DeclaringType
+                        && !_tiposAvaliados.Contains(propertyInfo.PropertyType))
+                    _tiposFaltandoAvaliar.Add(propertyInfo.PropertyType);
+            }
+            _tiposAvaliados.Add(propertiesInfo.FirstOrDefault().DeclaringType);
+            if (_tiposFaltandoAvaliar.Contains(propertiesInfo.FirstOrDefault().DeclaringType))
+                _tiposFaltandoAvaliar.Remove(propertiesInfo.FirstOrDefault().DeclaringType);
+            return null;
         }
     }
 }

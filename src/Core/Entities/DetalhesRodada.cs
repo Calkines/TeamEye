@@ -7,6 +7,8 @@ namespace TeamEye.Core.Entities
 {
     public class DetalhesRodada
     {
+        [TxtDataSource(PositionOrder = 1)]
+        public int Posicao { get; private set; }
         [TxtDataSource(PositionOrder = 4)]
         public int Pontos { get; private set; }
 
@@ -30,21 +32,7 @@ namespace TeamEye.Core.Entities
         
         public Rodada Rodada { get; private set; }
         public Time Time { get; private set; }
-
-        //public void RegistrarVitoria(int gp, int gc)
-        //{
-
-        //}
-        //public void RegistrarDerrota(int gp, int gc)
-        //{
-
-        //}
-
-        //public void RegistrarEmpate(int gp, int gc)
-        //{
-
-        //}
-
+        
         public DetalhesRodada(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Rodada rodada, Time time)
         {
             Pontos = pontos;

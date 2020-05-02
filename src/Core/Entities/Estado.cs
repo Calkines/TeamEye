@@ -7,7 +7,7 @@ namespace TeamEye.Core.Entities
 {
     public class Estado
     {
-        [TxtDataSourceAttribute(PositionOrder = 2)]
+        [TxtDataSource(PositionOrder = 3)]
         public string Sigla { get; private set; }
     }
 }

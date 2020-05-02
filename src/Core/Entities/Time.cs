@@ -17,7 +17,6 @@ namespace TeamEye.Core.Entities
         [TxtDataSource(PositionOrder = 2)]
         public string Nome { get; private set; }        
         public string NomeNormalizado { get; private set; }
-        [TxtDataSource(PositionOrder = 3)]
         public Estado Estado { get; private set; }
     }
 }

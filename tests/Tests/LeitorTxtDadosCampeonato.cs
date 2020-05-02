@@ -11,7 +11,9 @@ namespace TeamEye.Infra
     {
         [Theory]
         [InlineData("01	Corinthians		SP		81	38	24	9	5	71	31	")]
-        public void Dado_UmaLinhaEmUmArquivoDeTexto_Quando_RealizarLeituraDaLinha_Entao_UmObjetoRepresentandoOsDetalhesDaRodadaDeveSerRetornado(string linha)
+        [InlineData("03	Grêmio			RS		68	38	20	8	10	52	32")]
+        [InlineData("05	Internacional	RS		60	38	17	9	12	39	38")]
+        public void Dado_UmaLinhaComDezInformacoes_Quando_RealizarLeituraDaLinhaEsperandoDezInformacoes_Entao_UmObjetoRepresentandoOsDetalhesDaRodadaDeveSerRetornado(string linha)
         {
             //Arrange            
             var leitor = new Infra.Leitores.LeitorTxtDadosCampeonato();
@@ -25,7 +27,7 @@ namespace TeamEye.Infra
 
         [Theory]
         [InlineData("01	Corinthians		SP		81	38	24	9	5	71	")]
-        public void Dado_UmaLinhaComInformacoesIncompletas_Quando_RealizarLeituraDaLinha_Entao_UmaExcecaoDeLinhaComDadosIncompletosDeveSerLancada(string linha)
+        public void Dado_UmaLinhaComNoveInformacoes_Quando_RealizarLeituraDaLinhaEsperandoDezInformacoes_Entao_UmaExcecaoDeLinhaComDadosIncompletosDeveSerLancada(string linha)
         {
             //Arrange            
             var leitor = new Infra.Leitores.LeitorTxtDadosCampeonato();
@@ -36,7 +38,6 @@ namespace TeamEye.Infra
                 //Act
                 DetalhesRodada resultado = leitor.InterpretarDetalhesRodada(linha);
             });
-
         }
     }
 }
