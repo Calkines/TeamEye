@@ -12,6 +12,7 @@ namespace TeamEye.Core.Entities
             Estado = estado;
         }
         public string Nome { get; private set; }
+        public string NomeNormalizado { get; private set; }
         public string Estado { get; private set; }
     }
 }
