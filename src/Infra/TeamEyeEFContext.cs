@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TeamEye.Core.Entities;
+using TeamEye.Infra.Map;
 
 namespace TeamEye.Infra
 {
@@ -14,6 +15,11 @@ namespace TeamEye.Infra
 
         public TeamEyeEFContext(DbContextOptions<TeamEyeEFContext> opt) : base(opt)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new CampeonatoMap());
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using TeamEye.Services.ViewModel;
+using TeamEye.Crosscutting.ViewModel;
 
 namespace TeamEye.Services.Interfaces
 {
     public interface ILeitorDadosCampeonatoService
     {
-        DadosCampeonatoViewModel BuscarDados();
+        DadosCampeonatoViewModel ImportarDados(Stream stream);
     }
 }

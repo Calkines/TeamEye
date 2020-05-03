@@ -21,7 +21,6 @@ namespace TeamEye.Core.Entities
             Campeonato = campeonato;
             Time = time;
         }
-        //An empty constructor is a requirement for Automapper
         public DetalheCampeonato()
         {
         }

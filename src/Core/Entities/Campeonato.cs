@@ -17,6 +17,10 @@ namespace TeamEye.Core.Entities
             Ano = ano;
             Nome = nomeCampeonato;
         }
+        public Campeonato()
+        {
+
+        }
         #endregion
 
         #region . : Properties : .

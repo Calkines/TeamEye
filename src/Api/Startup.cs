@@ -15,6 +15,7 @@ using System.Reflection;
 using System.IO;
 using TeamEye.Infra;
 using Microsoft.EntityFrameworkCore;
+using TeamEye.WebApi.Extensions;
 
 namespace TeamEye.Api
 {
@@ -31,7 +32,13 @@ namespace TeamEye.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
+            #region . : Custom Services by Extension Methods : .
+            services.AddThirdTools();
+            services.AddServicesDependency();
+            services.AddRepositories();
+            #endregion
+
             services.AddDbContext<TeamEyeEFContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("MyCS"), x => x.MigrationsAssembly("TeamEye.Infra"));

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TeamEye.Services.ViewModel;
 
 namespace TeamEye.Api.Controllers
 {
@@ -22,7 +21,6 @@ namespace TeamEye.Api.Controllers
         //[HttpGet]
         //public IEnumerable<DadosCampeonatoViewModel> Get()
         //{
-            
         //}
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using TeamEye.Core.Entities;
 
-namespace TeamEye.Services.ViewModel
+namespace TeamEye.Crosscutting.ViewModel
 {
     public class DadosCampeonatoViewModel
     {
-        public List<Campeonato> campeonatos { get; set; }
+        public 
+            List<Campeonato> Campeonatos { get; set; }
     }
 }

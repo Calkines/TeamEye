@@ -13,6 +13,10 @@ namespace TeamEye.Core.Entities
         {
             Sigla = sigla;
         }
+        public Estado()
+        {
+
+        }
         #endregion
 
         #region . : Properties : .

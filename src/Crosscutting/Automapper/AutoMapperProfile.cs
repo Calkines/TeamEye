@@ -12,6 +12,7 @@ namespace TeamEye.Core.Crosscutting.Automapper
         public AutoMapperProfile()
         {
             CreateMap<LineDatailViewModel, DetalheCampeonato>().ForMember(x => x.Time, c => c.MapFrom(p => new Time(p.NomeTime, new Estado(p.SiglaEstado)))).ReverseMap();
+            CreateMap<DadosCampeonatoViewModel, Campeonato>().ReverseMap();
         }
     }
 }
