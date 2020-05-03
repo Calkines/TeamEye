@@ -5,7 +5,7 @@ using TeamEye.Core.Attributes;
 
 namespace TeamEye.Core.Entities
 {
-    public class DetalheRodada
+    public class DetalheCampeonato
     {
         [TxtDataSource(PositionOrder = 1)]
         public int Posicao { get; private set; }
@@ -30,10 +30,10 @@ namespace TeamEye.Core.Entities
         [TxtDataSource(PositionOrder = 10)]
         public int GolsContra { get; private set; } 
         
-        public Rodada Rodada { get; private set; }
+        public Campeonato Campeonato { get; private set; }
         public Time Time { get; private set; }
         
-        public DetalheRodada(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Rodada rodada, Time time)
+        public DetalheCampeonato(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Campeonato campeonato, Time time)
         {
             Pontos = pontos;
             Jogos = jogos;
@@ -42,16 +42,16 @@ namespace TeamEye.Core.Entities
             Derrotas = derrotas;
             GolsPro = golsPro;
             GolsContra = golsContra;
-            Rodada = rodada;
+            Campeonato = campeonato;
             Time = time;
         }
         //An empty constructor is a requirement for Automapper
-        public DetalheRodada()
+        public DetalheCampeonato()
         {
         }
-        public void SetRodada(Rodada rodada)
+        public void SetCampeonato(Campeonato campeonato)
         {
-            this.Rodada = rodada;
+            this.Campeonato = campeonato;
         }
         public void SetTime(Time time)
         {

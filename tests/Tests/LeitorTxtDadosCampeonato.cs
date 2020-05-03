@@ -26,14 +26,14 @@ namespace TeamEye.Infra
         [InlineData("01	Corinthians		SP		81	38	24	9	5	71	31	")]
         [InlineData("03	Grêmio			RS		68	38	20	8	10	52	32")]
         [InlineData("05	Internacional	RS		60	38	17	9	12	39	38")]
-        public void Dado_UmaLinhaComDezInformacoes_Quando_RealizarLeituraDaLinhaEsperandoDezInformacoes_Entao_UmObjetoRepresentandoOsDetalhesDaRodadaDeveSerRetornado(string linha)
+        public void Dado_UmaLinhaComDezInformacoes_Quando_RealizarLeituraDaLinhaEsperandoDezInformacoes_Entao_UmObjetoRepresentandoOsDetalhesDoCampeonatoDeveSerRetornado(string linha)
         {
             //Arrange            
             var leitor = new Infra.Leitores.LeitorTxtDadosCampeonato(_mapper);
-            var rodada = new Rodada(2015);
+            var campeonato = new Campeonato(2015);
 
             //Act
-            LineDatailViewModel resultado = leitor.InterpretarDetalhesRodada(linha);
+            LineDatailViewModel resultado = leitor.InterpretarDetalhesCampeonato(linha);
 
             //Assert
             Assert.NotNull(resultado);
@@ -45,13 +45,13 @@ namespace TeamEye.Infra
         {
             //Arrange            
             var leitor = new Leitores.LeitorTxtDadosCampeonato(_mapper);
-            var rodada = new Rodada(2015);
+            var campeonato = new Campeonato(2015);
 
             //Assert
             Assert.Throws<DadosIncompletosException>(() =>
             {
                 //Act
-                LineDatailViewModel resultado = leitor.InterpretarDetalhesRodada(linha);
+                LineDatailViewModel resultado = leitor.InterpretarDetalhesCampeonato(linha);
             });
         }
 
@@ -61,7 +61,7 @@ namespace TeamEye.Infra
         [InlineData("Mock//CampeonatoBrasileiro2018.txt")]
         [InlineData("Mock//CampeonatoBrasileiro2015.txt")]
         [InlineData("Mock//CampeonatoBrasileiro2019.txt")]
-        public void Dado_UmArquivoTextoComFormatoEsperado_QuandoRealizarALeituraDoArquivo_Entao_UmObjetoNaoNuloRepresentandoARodadaDeveSerRetornado(string path)
+        public void Dado_UmArquivoTextoComFormatoEsperado_QuandoRealizarALeituraDoArquivo_Entao_UmObjetoNaoNuloRepresentandoACampeonatoDeveSerRetornado(string path)
         {
             //Arrange
             var leitor = new Leitores.LeitorTxtDadosCampeonato(_mapper);
@@ -69,10 +69,10 @@ namespace TeamEye.Infra
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 //Act
-                var rodada = leitor.InterpretarDadosCampeonato(stream);
+                var campeonato = leitor.InterpretarDadosCampeonato(stream);
                 //Assert
-                Assert.IsType<Rodada>(rodada);
-                Assert.NotNull(rodada);
+                Assert.IsType<Campeonato>(campeonato);
+                Assert.NotNull(campeonato);
             }
         }
 
@@ -90,11 +90,11 @@ namespace TeamEye.Infra
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 //Act
-                var rodada = leitor.InterpretarDadosCampeonato(stream);
+                var campeonato = leitor.InterpretarDadosCampeonato(stream);
                 //Assert
-                Assert.IsType<Rodada>(rodada);
-                Assert.Equal(somaPontos, rodada.DetalhesRodada.Sum(p => p.Pontos));
-                Assert.NotNull(rodada);
+                Assert.IsType<Campeonato>(campeonato);
+                Assert.Equal(somaPontos, campeonato.DetalhesCampeonato.Sum(p => p.Pontos));
+                Assert.NotNull(campeonato);
             }
         }
     }

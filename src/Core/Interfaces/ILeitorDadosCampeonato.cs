@@ -8,6 +8,6 @@ namespace TeamEye.Core.Interfaces
 {
     public interface ILeitorDadosCampeonato
     {
-        Rodada InterpretarDadosCampeonato(Stream dados);
+        Campeonato InterpretarDadosCampeonato(Stream dados);
     }
 }

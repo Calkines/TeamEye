@@ -9,6 +9,6 @@ namespace TeamEye.Infra.Leitores
 {
     public abstract class LeitorDadosCampeonatoAbstract : ILeitorDadosCampeonato
     {
-        public abstract Rodada InterpretarDadosCampeonato(Stream dados);
+        public abstract Campeonato InterpretarDadosCampeonato(Stream dados);
     }
 }

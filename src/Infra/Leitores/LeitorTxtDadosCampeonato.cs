@@ -22,14 +22,14 @@ namespace TeamEye.Infra.Leitores
             _mapper = mapper;
         }        
 
-        public override Rodada InterpretarDadosCampeonato(Stream stream)
+        public override Campeonato InterpretarDadosCampeonato(Stream stream)
         {            
-            var ano = ProcurarAnoRodada(stream);
-            var rodada = new Rodada(ano);
-            LerDetalhesRodada(stream, rodada);
-            return rodada;
+            var ano = ProcurarAnoCampeonato(stream);
+            var campeonato = new Campeonato(ano);
+            LerDetalhesCampeonato(stream, campeonato);
+            return campeonato;
         }
-        private int ProcurarAnoRodada(Stream stream)
+        private int ProcurarAnoCampeonato(Stream stream)
         {
             int ano = default;
             var sr = new StreamReader(stream);
@@ -48,10 +48,10 @@ namespace TeamEye.Infra.Leitores
             stream.Seek(0, SeekOrigin.Begin);
             return ano;
         }
-        public LineDatailViewModel InterpretarDetalhesRodada(string linha)
+        public LineDatailViewModel InterpretarDetalhesCampeonato(string linha)
         {
             var linhaDecomposta = DecompoemLinhasTextoEmPedacos(linha);
-            return ConvertePedacosTextoEmDetalhesRodadaViewModel(linhaDecomposta);
+            return ConvertePedacosTextoEmDetalhesCampeonatoViewModel(linhaDecomposta);
         }
         private IEnumerable<string> DecompoemLinhasTextoEmPedacos(string linha)
         {
@@ -61,7 +61,7 @@ namespace TeamEye.Infra.Leitores
                     yield return pedaco;
             }
         }
-        private LineDatailViewModel ConvertePedacosTextoEmDetalhesRodadaViewModel(IEnumerable<string> pedacosTexto)
+        private LineDatailViewModel ConvertePedacosTextoEmDetalhesCampeonatoViewModel(IEnumerable<string> pedacosTexto)
         {
             var relation = ReflectionHelper.RetornaCorrespondenciaCampoPosicao();
 
@@ -74,28 +74,28 @@ namespace TeamEye.Infra.Leitores
             relation.TryGetValue(nameof(Estado.Sigla), out int posSiglaEstado);
             string siglaEstado = pedacosTexto.ElementAtOneBased(posSiglaEstado);
 
-            relation.TryGetValue(nameof(DetalheRodada.Posicao), out int posPosicao);
+            relation.TryGetValue(nameof(DetalheCampeonato.Posicao), out int posPosicao);
             int.TryParse(pedacosTexto.ElementAtOneBased(posPosicao), out int posicao);
 
-            relation.TryGetValue(nameof(DetalheRodada.Pontos), out int posPontos);
+            relation.TryGetValue(nameof(DetalheCampeonato.Pontos), out int posPontos);
             int.TryParse(pedacosTexto.ElementAtOneBased(posPontos), out int pontos);
 
-            relation.TryGetValue(nameof(DetalheRodada.Jogos), out int posJogos);
+            relation.TryGetValue(nameof(DetalheCampeonato.Jogos), out int posJogos);
             int.TryParse(pedacosTexto.ElementAtOneBased(posJogos), out int jogos);
 
-            relation.TryGetValue(nameof(DetalheRodada.Vitorias), out int posVitorias);
+            relation.TryGetValue(nameof(DetalheCampeonato.Vitorias), out int posVitorias);
             int.TryParse(pedacosTexto.ElementAtOneBased(posVitorias), out int vitorias);
 
-            relation.TryGetValue(nameof(DetalheRodada.Empates), out int posEmpates);
+            relation.TryGetValue(nameof(DetalheCampeonato.Empates), out int posEmpates);
             int.TryParse(pedacosTexto.ElementAtOneBased(posEmpates), out int empates);
 
-            relation.TryGetValue(nameof(DetalheRodada.Derrotas), out int posDerrotas);
+            relation.TryGetValue(nameof(DetalheCampeonato.Derrotas), out int posDerrotas);
             int.TryParse(pedacosTexto.ElementAtOneBased(posDerrotas), out int derrotas);
 
-            relation.TryGetValue(nameof(DetalheRodada.GolsPro), out int posGolsPro);
+            relation.TryGetValue(nameof(DetalheCampeonato.GolsPro), out int posGolsPro);
             int.TryParse(pedacosTexto.ElementAtOneBased(posGolsPro), out int golsPro);
 
-            relation.TryGetValue(nameof(DetalheRodada.GolsContra), out int posGolsContra);
+            relation.TryGetValue(nameof(DetalheCampeonato.GolsContra), out int posGolsContra);
             int.TryParse(pedacosTexto.ElementAtOneBased(posGolsContra), out int golsContra);
 
             return new LineDatailViewModel()
@@ -112,24 +112,24 @@ namespace TeamEye.Infra.Leitores
                 SiglaEstado = siglaEstado                
             };
         }
-        private void LerDetalhesRodada(Stream stream, Rodada rodada)
+        private void LerDetalhesCampeonato(Stream stream, Campeonato campeonato)
         {
             stream.Seek(0, SeekOrigin.Begin);
-            bool deveLerDetalhesRodada = false;
+            bool deveLerDetalhesCampeonato = false;
             var sr = new StreamReader(stream);
             while (!sr.EndOfStream)
             {
                 var linha = sr.ReadLine();
-                if (string.IsNullOrEmpty(linha) && deveLerDetalhesRodada || linha.Where(c => !char.IsControl(c)).Count() == 0)
+                if (string.IsNullOrEmpty(linha) && deveLerDetalhesCampeonato || linha.Where(c => !char.IsControl(c)).Count() == 0)
                     continue;
-                else if ((linha.Contains("----") && !deveLerDetalhesRodada))
-                    deveLerDetalhesRodada = true;
-                else if (deveLerDetalhesRodada)
+                else if ((linha.Contains("----") && !deveLerDetalhesCampeonato))
+                    deveLerDetalhesCampeonato = true;
+                else if (deveLerDetalhesCampeonato)
                 {
-                    var viewmodel = InterpretarDetalhesRodada(linha);
-                    var mapped = _mapper.Map<DetalheRodada>(viewmodel);
-                    mapped.SetRodada(rodada);
-                    rodada.RegistrarDetalhesDaRodada(mapped);
+                    var viewmodel = InterpretarDetalhesCampeonato(linha);
+                    var mapped = _mapper.Map<DetalheCampeonato>(viewmodel);
+                    mapped.SetCampeonato(campeonato);
+                    campeonato.RegistrarDetalhesCampeonato(mapped);
                 }
             }
             stream.Seek(0, SeekOrigin.Begin);
@@ -144,7 +144,7 @@ namespace TeamEye.Infra.Leitores
         {
             SortedDictionary<string, int> relacaoCampoPosicao = new SortedDictionary<string, int>();
 
-            foreach (var memberInfo in InspecionaMemberInfo(typeof(Rodada)))
+            foreach (var memberInfo in InspecionaMemberInfo(typeof(Campeonato)))
             {
                 foreach (TxtDataSourceAttribute attribute in memberInfo.GetCustomAttributes(typeof(TxtDataSourceAttribute), true))
                 {
