@@ -4,7 +4,12 @@ using System.Text;
 
 namespace TeamEye.Core.Interfaces
 {
-    class IAbstractRepository
+    public interface IAbstractRepository<T> : IDisposable where T : class, IEntity
     {
+        void Incluir(T entity);
+        void Alterar(T entity);
+        T SelecionarPorId(int id);
+        void Excluir(int id);
+        List<T> SelecionarTodos();
     }
 }

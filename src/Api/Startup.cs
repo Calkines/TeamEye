@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using TeamEye.Infra;
+using Microsoft.EntityFrameworkCore;
 
 namespace TeamEye.Api
 {
@@ -30,6 +32,11 @@ namespace TeamEye.Api
         {
             services.AddControllers();
             
+            services.AddDbContext<TeamEyeEFContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("MyCS"), x => x.MigrationsAssembly("TeamEye.Infra"));
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", 
