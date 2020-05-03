@@ -2,11 +2,33 @@
 using System.Collections.Generic;
 using System.Text;
 using TeamEye.Core.Attributes;
+using TeamEye.Core.Interfaces;
 
 namespace TeamEye.Core.Entities
 {
-    public class DetalheCampeonato
+    public class DetalheCampeonato : IEntity
     {
+        #region . : Constructors : .
+        public DetalheCampeonato(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Campeonato campeonato, Time time)
+        {
+            Pontos = pontos;
+            Jogos = jogos;
+            Vitorias = vitorias;
+            Empates = empates;
+            Derrotas = derrotas;
+            GolsPro = golsPro;
+            GolsContra = golsContra;
+            Campeonato = campeonato;
+            Time = time;
+        }
+        //An empty constructor is a requirement for Automapper
+        public DetalheCampeonato()
+        {
+        }
+        #endregion
+
+        #region . : Properties : .
+        public int Id { get; private set; }
         [TxtDataSource(PositionOrder = 1)]
         public int Posicao { get; private set; }
         [TxtDataSource(PositionOrder = 4)]
@@ -32,23 +54,9 @@ namespace TeamEye.Core.Entities
         
         public Campeonato Campeonato { get; private set; }
         public Time Time { get; private set; }
-        
-        public DetalheCampeonato(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Campeonato campeonato, Time time)
-        {
-            Pontos = pontos;
-            Jogos = jogos;
-            Vitorias = vitorias;
-            Empates = empates;
-            Derrotas = derrotas;
-            GolsPro = golsPro;
-            GolsContra = golsContra;
-            Campeonato = campeonato;
-            Time = time;
-        }
-        //An empty constructor is a requirement for Automapper
-        public DetalheCampeonato()
-        {
-        }
+        #endregion
+
+        #region . : Methods : .
         public void SetCampeonato(Campeonato campeonato)
         {
             this.Campeonato = campeonato;
@@ -57,6 +65,7 @@ namespace TeamEye.Core.Entities
         {
             this.Time = time;
         }
+        #endregion
     }
 }
 
