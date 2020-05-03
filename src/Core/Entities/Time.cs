@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
-using TeamEye.Core.Crosscutting.Attributes;
+using TeamEye.Core.Attributes;
+using TeamEye.Core.Extensions;
 
 namespace TeamEye.Core.Entities
 {
@@ -11,7 +14,7 @@ namespace TeamEye.Core.Entities
         {
             Nome = nome;
             Estado = estado;
-            NomeNormalizado = StringNormalizationExtensions.Normalize(nome);
+            NomeNormalizado = nome.NormalizarString();
         }
 
         [TxtDataSource(PositionOrder = 2)]
