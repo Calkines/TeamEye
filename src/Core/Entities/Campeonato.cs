@@ -8,7 +8,7 @@ namespace TeamEye.Core.Entities
     public class Campeonato : IEntity
     {
         #region . : Private Members : .
-        private List<DetalheCampeonato> _detalhesCampeonato = new List<DetalheCampeonato>();
+        //private List<DetalheCampeonato> _detalhesCampeonato = new List<DetalheCampeonato>();
         #endregion
 
         #region . : Constructors : .
@@ -27,13 +27,15 @@ namespace TeamEye.Core.Entities
         public int Id { get; private set; }
         public int Ano { get; private set; }
         public string Nome { get; private set; }
-        public IReadOnlyList<DetalheCampeonato> DetalhesCampeonato { get { return _detalhesCampeonato; } }
+        //public IReadOnlyList<DetalheCampeonato> DetalhesCampeonato { get { return _detalhesCampeonato; } }
+        public IList<DetalheCampeonato> DetalhesCampeonato { get; private set; } = new List<DetalheCampeonato>();
         #endregion
 
         #region . : Methods : . 
         public void RegistrarDetalhesCampeonato(DetalheCampeonato detalheCampeonato)
         {
-            _detalhesCampeonato.Add(detalheCampeonato);
+            //_detalhesCampeonato.Add(detalheCampeonato);
+            DetalhesCampeonato.Add(detalheCampeonato);
         }
         #endregion
     }

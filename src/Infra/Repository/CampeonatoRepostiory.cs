@@ -37,6 +37,16 @@ namespace TeamEye.Infra.Repository
                     _context.SaveChanges();
                 }
             }
+            foreach (var dc in entity.DetalhesCampeonato)
+            {
+                if (_context.DetalheCampeonatos.AsQueryable().Count(x => x.Campeonato.Ano == dc.Campeonato.Ano && x.TimeId == dc.Time.Id) > 0)
+                    entity.RegistrarDetalhesCampeonato(_context.DetalheCampeonatos.AsQueryable().Where(x => x.CampeonatoId == dc.Campeonato.Id && x.TimeId == dc.TimeId).FirstOrDefault());
+                else
+                {
+                    _context.Add(dc);
+                    _context.SaveChanges();
+                }
+            }
             //Inclui último nível (campeonato)            
             base.Incluir(entity);
         }

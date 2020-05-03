@@ -140,7 +140,7 @@ namespace TeamEye.Infra.Migrations
                         .IsRequired();
 
                     b.HasOne("TeamEye.Core.Entities.Time", "Time")
-                        .WithMany("DetalheCampeonatos")
+                        .WithMany()
                         .HasForeignKey("TimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
