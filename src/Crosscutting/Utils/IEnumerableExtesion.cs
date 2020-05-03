@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TeamEye.Core.Crosscutting.Utils
+namespace TeamEye.Crosscutting.Utils
 {
     public static class IEnumerableExtesion
     {
