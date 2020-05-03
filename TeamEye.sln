@@ -1,23 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3ABE2958-B8F3-4445-BCC0-2DC8A841A6CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamEye.Core", "src\Core\TeamEye.Core.csproj", "{AA57325E-E966-41EE-8B4C-713708C5AE99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamEye.Core", "src\Core\TeamEye.Core.csproj", "{AA57325E-E966-41EE-8B4C-713708C5AE99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamEye.Api", "src\Api\TeamEye.Api.csproj", "{C9212B4A-EF4F-4E3B-876E-32F4E51942D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamEye.WebApi", "src\Api\TeamEye.WebApi.csproj", "{C9212B4A-EF4F-4E3B-876E-32F4E51942D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamEye.Services", "src\Services\TeamEye.Services.csproj", "{1E045379-31BF-48BE-BB8B-E9329E0C27B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamEye.Services", "src\Services\TeamEye.Services.csproj", "{1E045379-31BF-48BE-BB8B-E9329E0C27B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamEye.Infra", "src\Infra\TeamEye.Infra.csproj", "{FCA66062-386A-44AB-85EB-13277EC0E5E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamEye.Infra", "src\Infra\TeamEye.Infra.csproj", "{FCA66062-386A-44AB-85EB-13277EC0E5E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{09805223-637D-46AF-94FC-A5A1ECA2C848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamEye.Tests", "tests\Tests\TeamEye.Tests.csproj", "{DB4CA292-5B61-4C90-B6A3-AAE188E90B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamEye.Tests", "tests\Tests\TeamEye.Tests.csproj", "{DB4CA292-5B61-4C90-B6A3-AAE188E90B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamEye.Crosscutting", "src\Crosscutting\TeamEye.Crosscutting.csproj", "{47776A38-8DA7-43DB-B208-9E07FFF5451E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamEye.Crosscutting", "src\Crosscutting\TeamEye.Crosscutting.csproj", "{47776A38-8DA7-43DB-B208-9E07FFF5451E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AA57325E-E966-41EE-8B4C-713708C5AE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -105,6 +102,9 @@ Global
 		{47776A38-8DA7-43DB-B208-9E07FFF5451E}.Release|x86.ActiveCfg = Release|Any CPU
 		{47776A38-8DA7-43DB-B208-9E07FFF5451E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AA57325E-E966-41EE-8B4C-713708C5AE99} = {3ABE2958-B8F3-4445-BCC0-2DC8A841A6CD}
 		{C9212B4A-EF4F-4E3B-876E-32F4E51942D4} = {3ABE2958-B8F3-4445-BCC0-2DC8A841A6CD}
@@ -112,5 +112,8 @@ Global
 		{FCA66062-386A-44AB-85EB-13277EC0E5E4} = {3ABE2958-B8F3-4445-BCC0-2DC8A841A6CD}
 		{DB4CA292-5B61-4C90-B6A3-AAE188E90B05} = {09805223-637D-46AF-94FC-A5A1ECA2C848}
 		{47776A38-8DA7-43DB-B208-9E07FFF5451E} = {3ABE2958-B8F3-4445-BCC0-2DC8A841A6CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5935934-132F-4906-91E0-9B87E299E46A}
 	EndGlobalSection
 EndGlobal
