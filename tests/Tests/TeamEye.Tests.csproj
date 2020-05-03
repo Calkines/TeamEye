@@ -15,7 +15,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Crosscutting\TeamEye.Crosscutting.csproj" />
     <ProjectReference Include="..\..\src\Infra\TeamEye.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Mock\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Mock\CampeonatoBrasileiro2015.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Mock\CampeonatoBrasileiro2016.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Mock\CampeonatoBrasileiro2017.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Mock\CampeonatoBrasileiro2018.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Mock\CampeonatoBrasileiro2019.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

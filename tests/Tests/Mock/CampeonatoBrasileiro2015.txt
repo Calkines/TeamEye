@@ -1,0 +1,24 @@
+2015
+
+Pos	Time			Estado	P	J	V	E	D	GP	GC	
+---------------------------------------------------------
+01	Corinthians		SP		81	38	24	9	5	71	31	
+02	Atletico MG		MG		69	38	21	6	11	65	47	
+03	Grêmio			RS		68	38	20	8	10	52	32	
+04	São Paulo		SP		62	38	18	8	12	53	47	
+05	Internacional	RS		60	38	17	9	12	39	38	
+06	Sport			PE		59	38	15	14	9	53	38	
+07	Santos			SP		58	38	16	10	12	59	41	
+08	Cruzeiro		MG		55	38	15	10	13	44	35	
+09	Palmeiras		SP		53	38	15	8	15	60	51	
+10	Atletico Pr		PR		51	38	14	9	15	43	48	
+11	Ponte Preta		SP		51	38	13	12	13	41	40	
+12	Flamengo		RJ		49	38	15	4	19	45	53	
+13	Fluminense		RJ		47	38	14	5	19	40	49	
+14	Chapecoense		SC		47	38	12	11	15	34	44	
+15	Coritita		PR		44	38	11	11	16	31	42	
+16	Figueirense		SC		43	38	11	10	17	36	50	
+17	Avaí			SC		42	38	11	9	18	38	60	
+18	Vasco			RJ		41	38	10	11	17	28	54	
+19	Goias			GO		38	38	10	8	20	39	49	
+20	Joinvile		SC		31	38	7	10	21	26	48	

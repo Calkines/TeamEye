@@ -1,0 +1,26 @@
+2019
+
+Pos	Times			Estado	P	J	V	E	D	GP	GC			
+---------------------------------------------------------
+
+01	Flamengo		RJ		90	38	28	6	4	86	37				
+02	Santos			SP		74	38	22	8	8	60	33				
+03	Palmeiras		SP		74	38	21	11	6	61	32				
+04	Grêmio			RS		65	38	19	8	11	64	39				
+05	Athletico PR	PR		64	38	18	10	10	51	32				
+06	São Paulo		SP		63	38	17	12	9	39	30				
+07	Internacional	RS		57	38	16	9	13	44	39				
+08	Corinthians		SP		56	38	14	14	10	42	34				
+09	Fortaleza		CE		53	38	15	8	15	50	49				
+10	Goiás			GO		52	38	15	7	16	46	64				
+11	Bahia			BA		49	38	12	13	13	44	43				
+12	Vasco da Gama	RJ		49	38	12	13	13	39	45				
+13	Atlético MG		MG		48	38	13	9	16	45	49				
+14	Fluminense		RJ		46	38	12	10	16	38	46				
+15	Botafogo		RJ		43	38	13	4	21	31	45				
+16	Ceará			CE		39	38	10	9	19	36	41				
+17	Cruzeiro		MG		36	38	7	15	16	27	46				
+18	CSA				AL		32	38	8	8	22	24	58				
+19	Chapecoense		SC		32	38	7	11	20	31	52				
+20	Avaí			SC		20	38	3	11	24	18	62				
+													

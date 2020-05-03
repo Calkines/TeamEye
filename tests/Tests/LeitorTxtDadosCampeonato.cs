@@ -1,6 +1,11 @@
+using AutoMapper;
 using System;
+using System.IO;
+using System.Linq;
 using System.Text;
+using TeamEye.Core.Crosscutting.Automapper;
 using TeamEye.Core.Entities;
+using TeamEye.Crosscutting.ViewModel;
 using TeamEye.Infra.Leitores;
 using TeamEye.Infra.Leitores.Exceptions;
 using Xunit;
@@ -9,6 +14,14 @@ namespace TeamEye.Infra
 {
     public class LeitorTxtDadosCampeonato
     {
+        private readonly IMapper _mapper;
+        public LeitorTxtDadosCampeonato()
+        {
+            _mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(typeof(AutoMapperProfile));
+            }).CreateMapper();
+        }
         [Theory]
         [InlineData("01	Corinthians		SP		81	38	24	9	5	71	31	")]
         [InlineData("03	Grêmio			RS		68	38	20	8	10	52	32")]
@@ -16,10 +29,11 @@ namespace TeamEye.Infra
         public void Dado_UmaLinhaComDezInformacoes_Quando_RealizarLeituraDaLinhaEsperandoDezInformacoes_Entao_UmObjetoRepresentandoOsDetalhesDaRodadaDeveSerRetornado(string linha)
         {
             //Arrange            
-            var leitor = new Infra.Leitores.LeitorTxtDadosCampeonato();
+            var leitor = new Infra.Leitores.LeitorTxtDadosCampeonato(_mapper);
+            var rodada = new Rodada(2015);
 
             //Act
-            DetalhesRodada resultado = leitor.InterpretarDetalhesRodada(linha);
+            LineDatailViewModel resultado = leitor.InterpretarDetalhesRodada(linha);
 
             //Assert
             Assert.NotNull(resultado);
@@ -30,14 +44,58 @@ namespace TeamEye.Infra
         public void Dado_UmaLinhaComNoveInformacoes_Quando_RealizarLeituraDaLinhaEsperandoDezInformacoes_Entao_UmaExcecaoDeLinhaComDadosIncompletosDeveSerLancada(string linha)
         {
             //Arrange            
-            var leitor = new Infra.Leitores.LeitorTxtDadosCampeonato();
+            var leitor = new Leitores.LeitorTxtDadosCampeonato(_mapper);
+            var rodada = new Rodada(2015);
 
             //Assert
             Assert.Throws<DadosIncompletosException>(() =>
             {
                 //Act
-                DetalhesRodada resultado = leitor.InterpretarDetalhesRodada(linha);
+                LineDatailViewModel resultado = leitor.InterpretarDetalhesRodada(linha);
             });
+        }
+
+        [Theory]
+        [InlineData("Mock//CampeonatoBrasileiro2016.txt")]
+        [InlineData("Mock//CampeonatoBrasileiro2017.txt")]
+        [InlineData("Mock//CampeonatoBrasileiro2018.txt")]
+        [InlineData("Mock//CampeonatoBrasileiro2015.txt")]
+        [InlineData("Mock//CampeonatoBrasileiro2019.txt")]
+        public void Dado_UmArquivoTextoComFormatoEsperado_QuandoRealizarALeituraDoArquivo_Entao_UmObjetoNaoNuloRepresentandoARodadaDeveSerRetornado(string path)
+        {
+            //Arrange
+            var leitor = new Leitores.LeitorTxtDadosCampeonato(_mapper);
+
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                //Act
+                var rodada = leitor.InterpretarDadosCampeonato(stream);
+                //Assert
+                Assert.IsType<Rodada>(rodada);
+                Assert.NotNull(rodada);
+            }
+        }
+
+        [Theory]
+        [InlineData("Mock//CampeonatoBrasileiro2016.txt", 1040)]
+        [InlineData("Mock//CampeonatoBrasileiro2017.txt", 1037)]
+        [InlineData("Mock//CampeonatoBrasileiro2018.txt",1027)]
+        [InlineData("Mock//CampeonatoBrasileiro2015.txt",1049)]
+        [InlineData("Mock//CampeonatoBrasileiro2019.txt",1042)]
+        public void Dado_ValoresEspecificosDePontosPorCampeonato_QuandoRealizarALeituraDoArquivo_Entao_ASomaDosPontosDeveSerIgualAoEsperado(string path, int somaPontos)
+        {
+            //Arrange
+            var leitor = new Leitores.LeitorTxtDadosCampeonato(_mapper);
+
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                //Act
+                var rodada = leitor.InterpretarDadosCampeonato(stream);
+                //Assert
+                Assert.IsType<Rodada>(rodada);
+                Assert.Equal(somaPontos, rodada.DetalhesRodada.Sum(p => p.Pontos));
+                Assert.NotNull(rodada);
+            }
         }
     }
 }
