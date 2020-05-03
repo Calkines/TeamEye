@@ -27,8 +27,7 @@ namespace TeamEye.Core
         [InlineData("Grêmio","GREMIO")]
         [InlineData("Avaí","AVAI")]
         [InlineData("São Paulo", "SAO PAULO")]
-        [InlineData("Atlético MG", "ATLETICO MG")]
-        public void Dado_NomesDesnormalizados_Quando_ReliazaCriacaoDoObjetoTime_Entao_NomeNormalizadoDeveCorresponderAoEsperado(string nomeDesnormalizado, string normalizado)
+        public void Dado_NomeDesnormalizadoComAcentos_Quando_ReliazaCriacaoDoObjetoTime_Entao_NomeNormalizadoDeveCorresponderAoEsperadoSemAcentos(string nomeDesnormalizado, string normalizado)
         {
             //Arrange
             var estado = new Estado("RS");
@@ -37,6 +36,46 @@ namespace TeamEye.Core
             //Assert
             Assert.Equal(normalizado,time.NomeNormalizado);
             
+        }
+
+        [Theory]
+        [InlineData("Atletico Pr", "ATLETICO PARANAENSE")]
+        public void Dado_NomeDesnormalizadoComSigla_Quando_ReliazaCriacaoDoObjetoTime_Entao_NomeNormalizadoDeveCorresponderAoEsperadoComAdjetivoPatrio(string nomeDesnormalizado, string normalizado)
+        {
+            //Arrange
+            var estado = new Estado("PR");
+            //Act
+            var time = new Time(nomeDesnormalizado, estado);
+            //Assert
+            Assert.Equal(normalizado, time.NomeNormalizado);
+
+        }
+
+        [Theory]
+        [InlineData("Atlético Mg", "ATLETICO MINEIRO")]
+        [InlineData("Atlético Pr","ATLETICO PARANAENSE")]
+        public void Dado_NomeDesnormalizadoComSiglaEAcento_Quando_ReliazaCriacaoDoObjetoTime_Entao_NomeNormalizadoDeveCorresponderAoEsperadoComAdjetivoPatrioESemAcento(string nomeDesnormalizado, string normalizado)
+        {
+            //Arrange
+            var estado = new Estado("PR");
+            //Act
+            var time = new Time(nomeDesnormalizado, estado);
+            //Assert
+            Assert.Equal(normalizado, time.NomeNormalizado);
+
+        }
+
+        [Theory]
+        [InlineData("CSA", "CENTRO SPORTIVO ALAGOANO")]
+        public void Dado_NomeDesnormalizadoComGrafiaErrada_Quando_ReliazaCriacaoDoObjetoTime_Entao_NomeNormalizadoDeveCorresponderAoEsperadoComCorretaGrafia(string nomeDesnormalizado, string normalizado)
+        {
+            //Arrange
+            var estado = new Estado("AL");
+            //Act
+            var time = new Time(nomeDesnormalizado, estado);
+            //Assert
+            Assert.Equal(normalizado, time.NomeNormalizado);
+
         }
     }
 }

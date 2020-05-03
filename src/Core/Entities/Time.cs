@@ -14,7 +14,8 @@ namespace TeamEye.Core.Entities
         {
             Nome = nome;
             Estado = estado;
-            NomeNormalizado = nome.NormalizarString();
+            //Adicionar método de extensão para remover sigla do estado
+            NomeNormalizado = nome.CorrigeGrafia().TrocaSiglaEstadoPorAdjetivoPatrio().NormalizarString();
         }
 
         [TxtDataSource(PositionOrder = 2)]
