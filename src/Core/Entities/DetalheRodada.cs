@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TeamEye.Core.Crosscutting.Attributes;
+using TeamEye.Core.Attributes;
 
 namespace TeamEye.Core.Entities
 {
-    public class DetalhesRodada
+    public class DetalheRodada
     {
         [TxtDataSource(PositionOrder = 1)]
         public int Posicao { get; private set; }
@@ -33,7 +33,7 @@ namespace TeamEye.Core.Entities
         public Rodada Rodada { get; private set; }
         public Time Time { get; private set; }
         
-        public DetalhesRodada(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Rodada rodada, Time time)
+        public DetalheRodada(int pontos, int jogos, int vitorias, int empates, int derrotas, int golsPro, int golsContra, Rodada rodada, Time time)
         {
             Pontos = pontos;
             Jogos = jogos;
@@ -44,6 +44,17 @@ namespace TeamEye.Core.Entities
             GolsContra = golsContra;
             Rodada = rodada;
             Time = time;
+        }
+        public DetalheRodada()
+        {
+        }
+        public void SetRodada(Rodada rodada)
+        {
+            this.Rodada = rodada;
+        }
+        public void SetTime(Time time)
+        {
+            this.Time = time;
         }
     }
 }
