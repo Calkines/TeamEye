@@ -7,10 +7,10 @@ using TeamEye.Core.Entities;
 
 namespace TeamEye.Infra.Map
 {
-    public class CampeonatoMap : IEntityTypeConfiguration<Campeonato>
+    public class EstadoMap : IEntityTypeConfiguration<Estado>
     {
-        public void Configure(EntityTypeBuilder<Campeonato> builder)
-        {
+        public void Configure(EntityTypeBuilder<Estado> builder)
+        {           
         }
     }
 }
