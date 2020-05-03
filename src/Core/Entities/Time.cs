@@ -27,9 +27,20 @@ namespace TeamEye.Core.Entities
         #region . : Properties : .
         public int Id { get; set; }
         [TxtDataSource(PositionOrder = 2)]
-        public string Nome { get; private set; }        
+        public string Nome { get; private set; }
         public string NomeNormalizado { get; private set; }
+        #endregion
+
+        #region . : Navegation Properties : .
+        public int EstadoId { get; set; }
         public Estado Estado { get; private set; }
+        #endregion
+
+        #region . : Methods : .
+        public void SetEstado(Estado estado)
+        {
+            Estado = estado;
+        }
         #endregion
     }
 }

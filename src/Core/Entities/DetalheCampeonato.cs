@@ -49,20 +49,24 @@ namespace TeamEye.Core.Entities
         public int GolsPro { get; private set; }
 
         [TxtDataSource(PositionOrder = 10)]
-        public int GolsContra { get; private set; } 
-        
+        public int GolsContra { get; private set; }
+        #endregion
+
+        #region . : Navegation Properties : .
+        public int CampeonatoId { get; set; }
         public Campeonato Campeonato { get; private set; }
+        public int TimeId { get; set; }
         public Time Time { get; private set; }
         #endregion
 
         #region . : Methods : .
         public void SetCampeonato(Campeonato campeonato)
         {
-            this.Campeonato = campeonato;
+            Campeonato = campeonato;
         }
         public void SetTime(Time time)
         {
-            this.Time = time;
+            Time = time;
         }
         #endregion
     }

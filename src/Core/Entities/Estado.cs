@@ -24,5 +24,9 @@ namespace TeamEye.Core.Entities
         [TxtDataSource(PositionOrder = 3)]
         public string Sigla { get; private set; }
         #endregion
+
+        #region . : Navegation Properties : .
+        public IList<Time> Times { get; private set; }
+        #endregion
     }
 }

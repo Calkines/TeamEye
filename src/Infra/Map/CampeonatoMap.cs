@@ -11,6 +11,9 @@ namespace TeamEye.Infra.Map
     {
         public void Configure(EntityTypeBuilder<Campeonato> builder)
         {
+            builder.HasIndex(x => new { x.Ano, x.Nome }).IsUnique();
+
+            builder.HasMany(x => x.DetalhesCampeonato).WithOne(x => x.Campeonato).HasForeignKey(x => x.CampeonatoId);
         }
     }
 }
