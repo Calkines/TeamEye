@@ -45,6 +45,7 @@ namespace TeamEye.Core.Entities
             Rodada = rodada;
             Time = time;
         }
+        //An empty constructor is a requirement for Automapper
         public DetalheRodada()
         {
         }
