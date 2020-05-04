@@ -8,7 +8,7 @@ using TeamEye.Core.Interfaces;
 
 namespace TeamEye.Infra.Repository
 {
-    public class DetalheCampeonatoRepostiory : AbstractRepostiory<DetalheCampeonato>, IDetalheCampeonatoRepostiory
+    public class DetalheCampeonatoRepostiory : AbstractRepostiory<DetalheCampeonato>, IDetalheCampeonatoRepository
     {
         public DetalheCampeonatoRepostiory(TeamEyeEFContext context): base(context)
         {

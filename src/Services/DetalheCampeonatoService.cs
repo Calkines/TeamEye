@@ -11,9 +11,9 @@ namespace TeamEye.Services
 {
     public class DetalheCampeonatoService : IDetalheCampeonatoService
     {
-        private readonly IDetalheCampeonatoRepostiory _repo;
+        private readonly IDetalheCampeonatoRepository _repo;
         private readonly IMapper _mapper;
-        public DetalheCampeonatoService(IDetalheCampeonatoRepostiory repo, IMapper mapper)
+        public DetalheCampeonatoService(IDetalheCampeonatoRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

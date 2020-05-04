@@ -14,7 +14,7 @@ namespace TeamEye.WebApi.Extensions
         {
             services.AddScoped<ICampeonatoRepository, CampeonatoRepostiory>();
             services.AddScoped<ITimeRepository, TimeRepository>();
-            services.AddScoped<IDetalheCampeonatoRepostiory, DetalheCampeonatoRepostiory>();
+            services.AddScoped<IDetalheCampeonatoRepository, DetalheCampeonatoRepostiory>();
             services.AddScoped<IEstadoRepository, EstadoRepository>();
         }
     }
