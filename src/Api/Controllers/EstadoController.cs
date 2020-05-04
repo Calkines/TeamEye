@@ -25,14 +25,33 @@ namespace TeamEye.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_service.RecuperarDadosTime());
-            //return Ok();
+            try
+            {
+                _logger.LogInformation("Início da requisição de dados por Estado de forma geral.");
+                return Ok(_service.RecuperarDadosTime());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Falha na execução da requisição de Estados. Message: {ex.Message}");
+                return BadRequest();
+            }
         }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_service.RecuperarDadosTime(id));
-            //return Ok();
+            try
+            {
+                _logger.LogInformation("Início da requisição de dados por Estado de forma específica.");
+                return Ok(_service.RecuperarDadosTime(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Falha na execução da requisição de Estados. Message: {ex.Message}");
+                return BadRequest();
+            }
+            
+            
         }
     }
 }

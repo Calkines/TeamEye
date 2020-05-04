@@ -25,13 +25,32 @@ namespace TeamEye.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_service.RecuperarDadosTime());
-            //return Ok(_service.RecuperarDadosCampeonato());
+            try
+            {
+                _logger.LogInformation("Início da requisição de dados por Time de forma geral.");
+                return Ok(_service.RecuperarDadosTime());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Falha na execução da requisição de times. Message: {ex.Message}");
+                return BadRequest();
+            }            
         }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_service.RecuperarDadosTime(id));
+            try
+            {
+                _logger.LogInformation("Início da requisição de dados por Times de forma específica.");
+                return Ok(_service.RecuperarDadosTime(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Falha na execução da requisição de times. Message: {ex.Message}");
+                return BadRequest();
+            }
+            
         }
     }
 }

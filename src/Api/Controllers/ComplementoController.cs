@@ -25,14 +25,16 @@ namespace TeamEye.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            //return Ok(_service.RecuperarDadosTime());
-            return Ok(_service.RecuperarDadosComplementares());
-        }
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            //return Ok(_service.RecuperarDadosTime(id));
-            return Ok();
+            try
+            {
+                _logger.LogInformation("Inicio da geração de dados complementares");
+                return Ok(_service.RecuperarDadosComplementares());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Falha na geração de dados complementares. Message: {ex.Message}");
+                return BadRequest();
+            }
         }
     }
 }

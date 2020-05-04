@@ -35,24 +35,28 @@ namespace TeamEye.Services
             var result = new DadosComplementaresViewModel();
 
             var melhorGolsContra = RecuperarMelhorMediaGolsContra();
-            result.MelhorMediaDeGolsContra = new KeyValuePair<string, int>(times.Where(x => x.Id == melhorGolsContra.Keys.FirstOrDefault()).FirstOrDefault().NomeNormalizado,
-                                                                                            melhorGolsContra.Values.FirstOrDefault());
+            result.MelhorMediaDeGolsContra = new KeyValuePair<string, int>(times.Where(x => x.Id == melhorGolsContra.Key).FirstOrDefault().NomeNormalizado,
+                                                                                            melhorGolsContra.Value);
 
             var melhorGolsPro = RecuperarMelhorMediaGolsPro();
-            result.MelhorMediaDeGolsPro= new KeyValuePair<string, int>(times.Where(x => x.Id == melhorGolsPro.Keys.FirstOrDefault()).FirstOrDefault().NomeNormalizado, 
-                                                                                            melhorGolsPro.Values.FirstOrDefault());
+            result.MelhorMediaDeGolsPro= new KeyValuePair<string, int>(times.Where(x => x.Id == melhorGolsPro.Key).FirstOrDefault().NomeNormalizado, 
+                                                                                            melhorGolsPro.Value);
 
             var timeComMaisVitorias = RecuperarTimeComMaisVitorias();
-            result.MaiorNumeroVitorias = new KeyValuePair<string, int>(times.Where(x => x.Id == timeComMaisVitorias.Keys.FirstOrDefault()).FirstOrDefault().NomeNormalizado, 
-                                                                                            timeComMaisVitorias.Values.FirstOrDefault());
+            result.MaiorNumeroVitorias = new KeyValuePair<string, int>(times.Where(x => x.Id == timeComMaisVitorias.Key).FirstOrDefault().NomeNormalizado, 
+                                                                                            timeComMaisVitorias.Value);
 
             var timeComMenosVitorias = RecuperarTimeComMenosVitorias();
-            result.MenorNumeroVitorias = new KeyValuePair<string, int>(times.Where(x => x.Id == timeComMenosVitorias.Keys.FirstOrDefault()).FirstOrDefault().NomeNormalizado,
-                                                                                            timeComMenosVitorias.Values.FirstOrDefault());
+            result.MenorNumeroVitorias = new KeyValuePair<string, int>(times.Where(x => x.Id == timeComMenosVitorias.Key).FirstOrDefault().NomeNormalizado,
+                                                                                            timeComMenosVitorias.Value);
+            var melhorMediaVitorias = RecuperarMelhorMediaVitoriaPorCampeonato();
+            result.MelhorMediaVitoriasPorCampeonato = new KeyValuePair<string, int>(times.Where(x => x.Id == melhorMediaVitorias.Key).FirstOrDefault().NomeNormalizado,
+                                                                                            melhorMediaVitorias.Value);
+            var menorMediaVitorias = RecuperarMenorMediaVitoriaPorCampeonato();
+            result.MenorMediaVitoriasPorCampeonato = new KeyValuePair<string, int>(times.Where(x => x.Id == menorMediaVitorias.Key).FirstOrDefault().NomeNormalizado,
+                                                                                            menorMediaVitorias.Value);
 
-
-
-            throw new NotImplementedException();
+            return result;
         }
 
         public RetornoPorEstadoViewModel RecuperarDadosTime(int estadoId)
@@ -76,7 +80,7 @@ namespace TeamEye.Services
             return resultado;
         }
 
-        private Dictionary<int, int> RecuperarMelhorMediaGolsPro()
+        private KeyValuePair<int, int> RecuperarMelhorMediaGolsPro()
         {
             var result = from detalhe in _detalheRepo.EntidadePesquisavel()
                          group detalhe by detalhe.TimeId into timeGroup
@@ -88,9 +92,9 @@ namespace TeamEye.Services
                          orderby res.MediaGols descending
                          select res;
             var dadosBanco = result.ToList();
-            return new Dictionary<int, int>() { { dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().MediaGols } };
+            return new KeyValuePair<int, int>(dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().MediaGols);
         }
-        private Dictionary<int,int> RecuperarMelhorMediaGolsContra()
+        private KeyValuePair<int, int> RecuperarMelhorMediaGolsContra()
         {
             var result = from detalhe in _detalheRepo.EntidadePesquisavel()
                          group detalhe by detalhe.TimeId into timeGroup
@@ -102,9 +106,9 @@ namespace TeamEye.Services
                          orderby res.MediaGols
                          select res;
             var dadosBanco = result.ToList();
-            return new Dictionary<int, int>() { { dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().MediaGols } };
+            return new KeyValuePair<int, int>(dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().MediaGols);
         }
-        private Dictionary<int, int> RecuperarTimeComMaisVitorias()
+        private KeyValuePair<int, int> RecuperarTimeComMaisVitorias()
         {
             var result = from detalhe in _detalheRepo.EntidadePesquisavel()
                          group detalhe by detalhe.TimeId into timeGroup
@@ -116,9 +120,9 @@ namespace TeamEye.Services
                          orderby res.Vitorias descending
                          select res;
             var dadosBanco = result.ToList();
-            return new Dictionary<int, int>() { { dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().Vitorias } };
+            return new KeyValuePair<int, int>(dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().Vitorias);
         }
-        private Dictionary<int, int> RecuperarTimeComMenosVitorias()
+        private KeyValuePair<int, int> RecuperarTimeComMenosVitorias()
         {
             var result = from detalhe in _detalheRepo.EntidadePesquisavel()
                          group detalhe by detalhe.TimeId into timeGroup
@@ -130,26 +134,36 @@ namespace TeamEye.Services
                          orderby res.Vitorias ascending
                          select res;
             var dadosBanco = result.ToList();
-            return new Dictionary<int, int>() { { dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().Vitorias } };
+            return new KeyValuePair<int, int>(dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().Vitorias);
         }
-        private List<KeyValuePair<string, int>> RecuperarMediaVitoriaPorCampeonato()
+        private KeyValuePair<int, int> RecuperarMelhorMediaVitoriaPorCampeonato()
         {
             var result = from detalhe in _detalheRepo.EntidadePesquisavel()
-                         group detalhe by detalhe.CampeonatoId into campGroup
+                         group detalhe by detalhe.TimeId into timeGroup
                          select new
                          {
-                             Campeonato = campGroup.Key,
-                             Time = campGroup.GroupBy(x => x.TimeId)                             
+                             Time = timeGroup.Key,
+                             MelhorMediaVitorias = timeGroup.Average(x => x.Vitorias)
                          } into res
-                         orderby res.Time ascending
+                         orderby res.MelhorMediaVitorias descending
                          select res;
             var dadosBanco = result.ToList();
-
-            foreach (var campeonato in dadosBanco)
-            {
-
-            }
-            return new Dictionary<int, int>() { { dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().Vitorias } };
+            return new KeyValuePair<int, int>(dadosBanco.FirstOrDefault().Time, (int)dadosBanco.FirstOrDefault().MelhorMediaVitorias);
         }
+        private KeyValuePair<int,int> RecuperarMenorMediaVitoriaPorCampeonato()
+        {
+            var result = from detalhe in _detalheRepo.EntidadePesquisavel()
+                         group detalhe by detalhe.TimeId into timeGroup
+                         select new
+                         {
+                             Time = timeGroup.Key,
+                             MenorMediaVitorias = timeGroup.Average(x => x.Vitorias)
+                         } into res
+                         orderby res.MenorMediaVitorias
+                         select res;
+            var dadosBanco = result.ToList();
+            return new KeyValuePair<int, int>(dadosBanco.FirstOrDefault().Time,(int)dadosBanco.FirstOrDefault().MenorMediaVitorias);
+        }
+        
     }
 }
