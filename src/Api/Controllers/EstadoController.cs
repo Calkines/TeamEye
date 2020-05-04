@@ -11,12 +11,12 @@ namespace TeamEye.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TimeController : ControllerBase
+    public class EstadoController : ControllerBase
     {
-        private readonly ILogger<TimeController> _logger;
-        private readonly ITimeService _service;
+        private readonly ILogger<EstadoController> _logger;
+        private readonly IEstadoService _service;
 
-        public TimeController(ILogger<TimeController> logger, ITimeService service)
+        public EstadoController(ILogger<EstadoController> logger, IEstadoService service)
         {
             _logger = logger;
             _service = service;
@@ -26,12 +26,13 @@ namespace TeamEye.Api.Controllers
         public IActionResult Get()
         {
             return Ok(_service.RecuperarDadosTime());
-            //return Ok(_service.RecuperarDadosCampeonato());
+            //return Ok();
         }
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             return Ok(_service.RecuperarDadosTime(id));
+            //return Ok();
         }
     }
 }

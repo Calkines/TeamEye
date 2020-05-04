@@ -9,35 +9,37 @@ using TeamEye.Services.Interfaces;
 
 namespace TeamEye.Services
 {
-    public class TimeService : ITimeService
+    public class EstadoService : IEstadoService
     {
-        private readonly ITimeRepository _repo;
+        private readonly IEstadoRepository _repo;
         private readonly IMapper _mapper;
         private readonly IDetalheCampeonatoService _detalheCampService;
-        
-        public TimeService(ITimeRepository repo, IMapper mapper, IDetalheCampeonatoService detalheCampSerivce)
+        private readonly ITimeService _timeService;
+        public EstadoService(IEstadoRepository repo, IMapper mapper, IDetalheCampeonatoService detalheCampSerivce, ITimeService timeService)
         {
             _repo = repo;
             _mapper = mapper;
             _detalheCampService = detalheCampSerivce;
+            _timeService = timeService;
         }
-        public IList<TimeViewModel> RecuperarDadosTime()
+        public IList<EstadoViewModel> RecuperarDadosTime()
         {
-            return _mapper.Map<List<TimeViewModel>>(_repo.SelecionarTodos());
+            return _mapper.Map<List<EstadoViewModel>>(_repo.SelecionarTodos());
         }
 
-        public RetornoPorTimeViewModel RecuperarDadosTime(int id)
+        public RetornoPorEstadoViewModel RecuperarDadosTime(int estadoId)
         {
-            
-            var baseDados = _detalheCampService.SelecionarDetalheCampeonatoPorTime(id);
-            var resultado = new RetornoPorTimeViewModel()
+
+            var listaIds = _timeService.RecuperarDadosTimePorEstadoId(estadoId).ToList().Select(x => x.Id).ToList();
+            var baseDados = _detalheCampService.SelecionarDetalheCampeonatoPorTime(listaIds);
+            var resultado = new RetornoPorEstadoViewModel()
             {
                 TotalDerrotas = baseDados.Sum(x => x.Derrotas),
                 TotalEmpates = baseDados.Sum(x => x.Empates),
                 TotalGolsContra = baseDados.Sum(x => x.GolsContra),
                 TotalGolsPro = baseDados.Sum(x => x.GolsPro),
                 TotalJogos = baseDados.Sum(x => x.Jogos),
-                NomeTimeNormalizado = baseDados.FirstOrDefault()?.NomeTimeNormalizado,
+                SiglaEstado = baseDados.FirstOrDefault()?.SiglaEstado,
                 Posicao = (int)baseDados.Average(x => x.Posicao),
                 QuantidadeCampeonatosDisputados = baseDados.Count,
                 TotalPontos = baseDados.Sum(x => x.Pontos),
@@ -46,9 +48,6 @@ namespace TeamEye.Services
             return resultado;
         }
 
-        public IList<TimeViewModel> RecuperarDadosTimePorEstadoId(int estadoId)
-        {
-            return _mapper.Map<List<TimeViewModel>>(_repo.EntidadePesquisavel().Where(x => x.EstadoId == estadoId));
-        }
+
     }
 }

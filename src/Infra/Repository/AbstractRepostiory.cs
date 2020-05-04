@@ -24,6 +24,11 @@ namespace TeamEye.Infra.Repository
             _context.Dispose();
         }
 
+        public IQueryable<T> EntidadePesquisavel()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
+
         public virtual void Excluir(int id)
         {
             var entity = SelecionarPorId(id);

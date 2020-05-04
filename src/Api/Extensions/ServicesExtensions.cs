@@ -15,6 +15,8 @@ namespace TeamEye.WebApi.Extensions
             services.AddScoped<ILeitorDadosCampeonatoService, LeitorDadosCampeonatoService>();
             services.AddScoped<ICampeonatoService, CampeonatoService>();
             services.AddScoped<ITimeService, TimeService>();
+            services.AddScoped<IDetalheCampeonatoService, DetalheCampeonatoService>();
+            services.AddScoped<IEstadoService, EstadoService>();
         }
     }
 }

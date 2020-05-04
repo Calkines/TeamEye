@@ -9,5 +9,6 @@ namespace TeamEye.Services.Interfaces
     {
         IList<TimeViewModel> RecuperarDadosTime();
         RetornoPorTimeViewModel RecuperarDadosTime(int id);
+        IList<TimeViewModel> RecuperarDadosTimePorEstadoId(int estadoId);
     }
 }

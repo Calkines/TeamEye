@@ -7,7 +7,7 @@ namespace TeamEye.Services.Interfaces
 {
     public interface ICampeonatoService
     {
-        IList<CampeonatoViewModel> RecuperarDadosCampeonato();
+        IList<CampeonatoResumidoViewModel> RecuperarDadosCampeonato();
         CampeonatoViewModel RecuperarDadosCampeonato(int ano);
     }
 }

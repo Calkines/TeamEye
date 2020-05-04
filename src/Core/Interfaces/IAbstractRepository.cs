@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TeamEye.Core.Interfaces
@@ -11,5 +12,6 @@ namespace TeamEye.Core.Interfaces
         T SelecionarPorId(int id);
         void Excluir(int id);
         List<T> SelecionarTodos();
+        IQueryable<T> EntidadePesquisavel();
     }
 }

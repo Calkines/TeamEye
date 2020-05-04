@@ -22,5 +22,9 @@ namespace TeamEye.Services
         {
             return _mapper.Map<List<DetalheCampeonatoViewModel>>(_repo.SelecionarDetalheCampeonatoPorTime(timeId));
         }
+        public List<DetalheCampeonatoViewModel> SelecionarDetalheCampeonatoPorTime(List<int> timesId)
+        {
+            return _mapper.Map<List<DetalheCampeonatoViewModel>>(_repo.SelecionarDetalheCampeonatoPorTime(timesId));
+        }
     }
 }

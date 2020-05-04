@@ -15,4 +15,9 @@ namespace TeamEye.Crosscutting.ViewModel
         public string Nome { get; set; }
         public IList<DetalheCampeonatoViewModel> DetalhesCampeonato { get; set; }
     }
+    public class CampeonatoResumidoViewModel
+    {
+        public int Ano { get; set; }
+        public string Nome { get; set; }
+    }
 }
