@@ -10,7 +10,7 @@ namespace TeamEye.Crosscutting.ViewModel
         public KeyValuePair<string, int> MelhorMediaDeGolsContra { get; set; }
         public KeyValuePair<string, int> MaiorNumeroVitorias { get; set; }
         public KeyValuePair<string, int> MenorNumeroVitorias { get; set; }
-        public KeyValuePair<string, int> MelhorMediaVitoriasPorCampeonato { get; set; }
-        public KeyValuePair<string, int> MenorMediaVitoriasPorCampeonato { get; set; }
+        public List<ResultadoPorCampeonatoViewModel> MelhorMediaVitoriasPorCampeonato { get; set; } = new List<ResultadoPorCampeonatoViewModel>();
+        public List<ResultadoPorCampeonatoViewModel> MenorMediaVitoriasPorCampeonato { get; set; } = new List<ResultadoPorCampeonatoViewModel>();
     }
 }
