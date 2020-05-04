@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace TeamEye.Infra.Repository
             foreach (var dc in entity.DetalhesCampeonato)
             {
                 if (_context.Times.AsQueryable().Count(x => x.NomeNormalizado == dc.Time.NomeNormalizado && x.EstadoId == dc.Time.Estado.Id) > 0)
-                    dc.SetTime(_context.Times.AsQueryable().Where(x => x.NomeNormalizado == dc.Time.NomeNormalizado && x.EstadoId == dc.Time.EstadoId).FirstOrDefault());
+                    dc.SetTime(_context.Times.AsQueryable().Where(x => x.NomeNormalizado == dc.Time.NomeNormalizado && x.EstadoId == dc.Time.Estado.Id).FirstOrDefault());
                 else
                 {
                     _context.Add(dc.Time);
@@ -39,16 +40,27 @@ namespace TeamEye.Infra.Repository
             }
             foreach (var dc in entity.DetalhesCampeonato)
             {
-                if (_context.DetalheCampeonatos.AsQueryable().Count(x => x.Campeonato.Ano == dc.Campeonato.Ano && x.TimeId == dc.Time.Id) > 0)
-                    entity.RegistrarDetalhesCampeonato(_context.DetalheCampeonatos.AsQueryable().Where(x => x.CampeonatoId == dc.Campeonato.Id && x.TimeId == dc.TimeId).FirstOrDefault());
-                else
-                {
-                    _context.Add(dc);
-                    _context.SaveChanges();
-                }
+                dc.TimeId = dc.Time.Id;
+                dc.Time.EstadoId = dc.Time.Estado.Id;
             }
             //Inclui último nível (campeonato)            
             base.Incluir(entity);
+        }
+
+        public Campeonato SelecionarCampeonatoPorAno(int ano)
+        {
+            return _context.Campeonatos.Where(x => x.Ano == ano)
+                                        .Include(x => x.DetalhesCampeonato)                                        
+                                        .ThenInclude(x => x.Time)
+                                        .ThenInclude(x => x.Estado)                                        
+                                        .FirstOrDefault();
+        }
+        public override List<Campeonato> SelecionarTodos()
+        {
+            return _context.Campeonatos.Include(x => x.DetalhesCampeonato)
+                                        .ThenInclude(x => x.Time)
+                                        .ThenInclude(x => x.Estado)
+                                        .ToList();
         }
     }
 }

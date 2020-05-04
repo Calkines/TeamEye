@@ -13,7 +13,7 @@ namespace TeamEye.Infra.Map
         {
             builder.HasIndex(i => new { i.EstadoId, i.NomeNormalizado }).IsUnique();
 
-            builder.HasOne(x => x.Estado).WithMany(x => x.Times).HasForeignKey(x => x.EstadoId);
+            builder.HasOne(x => x.Estado).WithMany(x => x.Times);
         }
     }
 }

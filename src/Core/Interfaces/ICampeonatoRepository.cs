@@ -7,5 +7,6 @@ namespace TeamEye.Core.Interfaces
 {
     public interface ICampeonatoRepository : IAbstractRepository<Campeonato>
     {
+        Campeonato SelecionarCampeonatoPorAno(int ano);
     }
 }

@@ -6,7 +6,7 @@ using TeamEye.Core.Interfaces;
 
 namespace TeamEye.Infra.Repository
 {
-    public class TimeRepository : AbstractRepostiory<Time>
+    public class TimeRepository : AbstractRepostiory<Time>, ITimeRepository
     {
         public TimeRepository(TeamEyeEFContext context) : base(context)
         {

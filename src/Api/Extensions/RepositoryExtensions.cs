@@ -13,6 +13,7 @@ namespace TeamEye.WebApi.Extensions
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<ICampeonatoRepository, CampeonatoRepostiory>();
+            services.AddScoped<ITimeRepository, TimeRepository>();
         }
     }
 }

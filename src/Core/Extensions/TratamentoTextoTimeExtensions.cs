@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TeamEye.Core.Extensions
 {
@@ -48,8 +49,8 @@ namespace TeamEye.Core.Extensions
             };
         private static Dictionary<string, string> _relacaoGrafiaCorrecao = new Dictionary<string, string>()
         {
-            {"Coritita","Coritiba" },
-            {"Joinvile","Joinville" },
+            {"CORITITA","Coritiba" },
+            {"JOINVILE","Joinville" },
             {"CSA","Centro Sportivo Alagoano" }
         };
         public static string NormalizarString(this string input)
@@ -72,11 +73,7 @@ namespace TeamEye.Core.Extensions
         {
             foreach (var sigla in _relacaoGrafiaCorrecao.Keys)
             {
-                if (input.ToUpper().Contains(sigla + ' ') || 
-                    input.ToUpper().Contains(' ' + sigla + ' ') || 
-                    (input.Length >=3 && input.ToUpper().Substring(input.Length - 3, 3).Equals(' ' + sigla)) ||
-                    (input.Length <= 3 && input.ToUpper().Contains(sigla))
-                    )
+                if (Regex.Match(input, $"^{sigla}$",RegexOptions.IgnoreCase).Success)
                     return input.Replace(sigla, _relacaoGrafiaCorrecao[sigla], StringComparison.OrdinalIgnoreCase);
             }
             return input;

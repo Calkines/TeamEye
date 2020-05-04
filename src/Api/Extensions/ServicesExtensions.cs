@@ -13,6 +13,8 @@ namespace TeamEye.WebApi.Extensions
         public static void AddServicesDependency(this IServiceCollection services)
         {
             services.AddScoped<ILeitorDadosCampeonatoService, LeitorDadosCampeonatoService>();
+            services.AddScoped<ICampeonatoService, CampeonatoService>();
+            services.AddScoped<ITimeService, TimeService>();
         }
     }
 }

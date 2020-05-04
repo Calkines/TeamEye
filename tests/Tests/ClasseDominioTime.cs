@@ -67,6 +67,7 @@ namespace TeamEye.Core
 
         [Theory]
         [InlineData("CSA", "CENTRO SPORTIVO ALAGOANO")]
+        [InlineData("Joinvile","JOINVILLE")]
         public void Dado_NomeDesnormalizadoComGrafiaErrada_Quando_ReliazaCriacaoDoObjetoTime_Entao_NomeNormalizadoDeveCorresponderAoEsperadoComCorretaGrafia(string nomeDesnormalizado, string normalizado)
         {
             //Arrange
