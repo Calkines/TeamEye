@@ -21,7 +21,7 @@ namespace TeamEye.Services
         }
         public IList<CampeonatoViewModel> RecuperarDadosCampeonato()
         {            
-            return _mapper.Map<List<CampeonatoViewModel>>(_repo.SelecionarTodos());
+            return _mapper.Map<List<CampeonatoViewModel>>(_repo.SelecionarTodos()).OrdernarPorPosicao();
         }
 
         public CampeonatoViewModel RecuperarDadosCampeonato(int ano)

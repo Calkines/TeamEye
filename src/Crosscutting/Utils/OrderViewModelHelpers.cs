@@ -13,5 +13,13 @@ namespace TeamEye.Crosscutting.Utils
             campeonato.DetalhesCampeonato = campeonato.DetalhesCampeonato.OrderBy(x => x.Posicao).ToList();
             return campeonato;
         }
+        public static List<CampeonatoViewModel> OrdernarPorPosicao(this List<CampeonatoViewModel> lstCampeonato)
+        {
+            foreach (var item in lstCampeonato)
+            {
+                item.DetalhesCampeonato = item.DetalhesCampeonato.OrderBy(x => x.Posicao).ToList();
+            }
+            return lstCampeonato;
+        }
     }
 }

@@ -28,8 +28,8 @@ namespace TeamEye.Api.Controllers
             return Ok(_service.RecuperarDadosTime());
             //return Ok(_service.RecuperarDadosCampeonato());
         }
-        [HttpGet("{ano}")]
-        public IActionResult Get(int ano)
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
             return Ok();
             //return Ok(_service.RecuperarDadosCampeonato(ano));

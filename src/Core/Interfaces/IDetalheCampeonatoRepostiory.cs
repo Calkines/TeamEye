@@ -7,5 +7,6 @@ namespace TeamEye.Core.Interfaces
 {
     public interface IDetalheCampeonatoRepostiory : IAbstractRepository<DetalheCampeonato>
     {
+        IList<DetalheCampeonato> SelecionarDetalheCampeonatoPorTime(int timeId);
     }
 }

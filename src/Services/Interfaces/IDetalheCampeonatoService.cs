@@ -5,9 +5,8 @@ using TeamEye.Crosscutting.ViewModel;
 
 namespace TeamEye.Services.Interfaces
 {
-    public interface ITimeService
+    public interface IDetalheCampeonatoService
     {
-        IList<TimeViewModel> RecuperarDadosTime();
-        RetornoPorTimeViewModel RecuperarDadosTime(int id);
+        List<DetalheCampeonatoViewModel> SelecionarDetalheCampeonatoPorTime(int timeId);
     }
 }

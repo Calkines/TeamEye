@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TeamEye.Core.Entities;
 using TeamEye.Core.Interfaces;
@@ -10,6 +12,10 @@ namespace TeamEye.Infra.Repository
     {
         public TimeRepository(TeamEyeEFContext context) : base(context)
         {
+        }
+        public override List<Time> SelecionarTodos()
+        {
+            return _context.Times.Include(x => x.Estado).ToList();
         }
     }
 }
